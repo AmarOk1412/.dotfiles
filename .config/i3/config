@@ -196,3 +196,9 @@ bar {
             urgent_workspace #c27042 #c27042 #ffffff
         }
 }
+
+
+client.focused              #ab9169 #ab9169 #000000
+client.unfocused            #000000 #000000 #ffffff
+client.focused_inactive     #000000 #000000 #ffffff
+client.urgent               #c27042 #c27042 #ffffff
