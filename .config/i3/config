@@ -7,6 +7,13 @@ set $alt Mod1
 
 font xft:xos4 terminus 8
 
+# Blue
+# set $firstcolor             #63c2c8
+# set $secondcolor            #4b9fa9
+# Gold
+set $firstcolor             #ab9169
+set $secondcolor            #c27042
+
 set $fundo                  #1b1b1b
 set $fundo-inativo          #222222
 set $texto                  #ffffff
@@ -51,6 +58,7 @@ bindsym $mod+Return exec gnome-terminal
 bindsym $mod+t exec thunderbird
 bindsym $mod+n exec firefox
 bindsym $mod+a exec atom
+bindsym $mod+g exec "python3 /home/amarok/.config/i3/magicgo.py"
 
 # kill focused window
 bindsym $alt+F4 kill
@@ -143,7 +151,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+ccedilla move container to workspace $ws9
 bindsym $mod+Shift+agrave move container to workspace $ws0
 
-exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
+exec --no-startup-id i3-msg 'workspace $ws1; exec flatpak run org.mozilla.FirefoxNightly --no-remote # exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws2; exec thunderbird'
 exec --no-startup-id i3-msg 'workspace $ws0; exec gnome-terminal'
 
@@ -190,15 +198,15 @@ bar {
             separator #000000
             background #000000
             statusline #ffffff
-            focused_workspace #ab9169 #ab9169 #000000
-            active_workspace #ab9169 #ab9169 #888888
+            focused_workspace $firstcolor $firstcolor #000000
+            active_workspace $firstcolor $firstcolor #888888
             inactive_workspace #000000 #000000 #ffffff
-            urgent_workspace #c27042 #c27042 #ffffff
+            urgent_workspace $secondcolor $secondcolor #ffffff
         }
 }
 
 
-client.focused              #ab9169 #ab9169 #000000
+client.focused              $firstcolor $firstcolor #000000
 client.unfocused            #000000 #000000 #ffffff
 client.focused_inactive     #000000 #000000 #ffffff
-client.urgent               #c27042 #c27042 #ffffff
+client.urgent               $secondcolor $secondcolor #ffffff
