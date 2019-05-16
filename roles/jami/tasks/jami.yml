@@ -1,0 +1,30 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+- name: Clone Jami
+  git:
+    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project
+    dest: /home/{{ username }}/Projects/jami
+    accept_hostkey: yes
+    force: yes
+    recursive: no
+
+- name: Init submodules
+  shell:
+    cmd: ./make-ring.py --init
+    chdir: /home/{{ username }}/Projects/jami
+
+# TODO move to .cqfd
+
+- name: Install dependencies
+  become: true
+  shell:
+    cmd: ./make-ring.py --dependencies
+    chdir: /home/{{ username }}/Projects/jami
+
+- name: Build Jami
+  shell:
+    cmd: ./make-ring.py --install
+    chdir: /home/{{ username }}/Projects/jami

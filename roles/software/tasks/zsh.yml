@@ -1,0 +1,9 @@
+- name: Install zsh
+  become: true
+  dnf:
+    name: zsh
+    state: latest
+
+- name: Change user shell to zsh
+  user: name={{ username }} shell=/bin/zsh
+  become: true

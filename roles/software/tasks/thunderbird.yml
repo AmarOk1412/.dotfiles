@@ -1,0 +1,5 @@
+- name: Install thunderbird
+  become: true
+  dnf:
+    name: thunderbird
+    state: latest

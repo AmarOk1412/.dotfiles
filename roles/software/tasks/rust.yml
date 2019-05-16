@@ -1,0 +1,23 @@
+- name: Install rust
+  become: true
+  dnf:
+    name: rust
+    state: latest
+
+- name: Install rustup
+  become: true
+  dnf:
+    name: rustup
+    state: latest
+
+- name: Install cargo
+  become: true
+  dnf:
+    name: cargo
+    state: latest
+
+- name: Update rustup
+  command: rustup self update
+
+- name: Update rust
+  command: rustup update

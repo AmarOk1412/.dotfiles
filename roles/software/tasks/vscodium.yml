@@ -1,0 +1,13 @@
+---
+
+- name: Download VSCodium
+  get_url:
+    url: https://github.com/VSCodium/vscodium/releases/download/1.33.1/vscodium-1.33.1-1556929676.el7.x86_64.rpm
+    dest: /tmp/vscodium.rpm
+    mode: 0700
+
+- name: Install VSCodium.
+  become: true
+  yum:
+     name: /tmp/vscodium.rpm
+     state: present

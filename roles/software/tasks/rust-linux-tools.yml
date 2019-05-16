@@ -1,0 +1,11 @@
+- name: Install bat
+  command: cargo install bat
+
+- name: Install exa
+  command: cargo install exa
+
+- name: Install fd-find
+  command: cargo install fd-find
+
+- name: Install ripgrep
+  command: cargo install ripgrep

@@ -1,0 +1,7 @@
+---
+
+- name: Install git-lfs
+  become: true
+  dnf:
+    name: git-lfs
+    state: latest

@@ -1,0 +1,5 @@
+- name: Install i3
+  become: true
+  dnf:
+    name: i3
+    state: latest

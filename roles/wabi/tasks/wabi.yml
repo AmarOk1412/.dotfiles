@@ -1,0 +1,11 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+- name: Clone Wabi
+  git:
+    repo: git@github.com:AmarOk1412/Wabi.git
+    dest: /home/{{ username }}/Projects/Wabi
+    accept_hostkey: yes
+    force: yes

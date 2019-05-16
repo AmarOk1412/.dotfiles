@@ -1,0 +1,5 @@
+- name: Install gimp
+  become: true
+  dnf:
+    name: gimp
+    state: latest

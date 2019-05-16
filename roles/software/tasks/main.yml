@@ -1,0 +1,17 @@
+- include: update.yml
+  tags: update
+- include: ansible.yml
+- include: docker.yml
+- include: gimp.yml
+- include: gnupg2.yml
+- include: i3.yml
+- include: rust.yml
+  tags: update
+- include: rust-linux-tools.yml
+- include: thunderbird.yml
+- include: vscodium.yml
+  tags:
+    - vscodium
+    - update
+- include: zsh.yml
+  tags: zsh

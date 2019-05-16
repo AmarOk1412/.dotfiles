@@ -1,0 +1,5 @@
+- name: Install gnupg2
+  become: true
+  dnf:
+    name: gnupg2
+    state: latest

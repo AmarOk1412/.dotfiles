@@ -1,0 +1,12 @@
+---
+
+- name: Configure device
+  hosts: localhost
+  vars:
+    - username: AmarOk
+  roles:
+    - info
+    - software
+    - jami
+    - wabi
+    

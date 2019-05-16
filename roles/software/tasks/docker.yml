@@ -1,0 +1,31 @@
+---
+
+- name: Make sure dnf-plugins.core installed
+  dnf:
+    name: dnf-plugins-core
+    state: present
+
+- name: Install docker repository
+  command: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+- name: Make sure docker from distro is not installed
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - docker
+    - docker-common
+    - container-selinux
+    - docker-selinux
+    - docker-engine
+
+- name: Install docker
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker-ce
+    - python-docker-py
+    - python-pip
+
+# Taken from https://github.com/abaez/ansible-role-docker/blob/master/tasks/os_family/Fedora.yml
