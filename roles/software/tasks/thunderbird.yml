@@ -3,3 +3,14 @@
   dnf:
     name: thunderbird
     state: latest
+
+- name: Get themes directory
+  command: ls /home/{{ username }}/.thunderbird/ | grep .default
+  register: thunderbird_themes_dir
+
+- name: Clone Monterail
+  git:
+    repo: git@github.com:spymastermatt/thunderbird-monterail.git
+    dest: {{ thunderbird_themes_dir }}
+    accept_hostkey: yes
+    force: yes
