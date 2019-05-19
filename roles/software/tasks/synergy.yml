@@ -1,0 +1,6 @@
+---
+- name: Install synergy
+  become: true
+  dnf:
+    name: synergy
+    state: latest

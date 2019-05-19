@@ -1,0 +1,8 @@
+- name: Init trustdb
+  command: gpg2 --list-keys
+
+- name: Import private key
+  command: gpg2 --import /tmp/decrypted_lutices/.key/EEB2A9A9.priv 
+
+- name: Import known public keys
+  shell: gpg2 --import /tmp/decrypted_lutices/.key/*.gpg

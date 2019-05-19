@@ -1,0 +1,17 @@
+- name: Install pass
+  become: true
+  dnf:
+    name: pass
+    state: latest
+
+- name: Install pass host for firefox
+  shell: "curl -sSL https://github.com/passff/passff-host/releases/download/1.2.1/install_host_app.sh | bash -s -- firefox"
+
+- name: Pass init EEB2A9A9
+  command: pass init EEB2A9A9
+
+- name: Retrieve password from decrypted backup
+  shell: |
+    rm -rf "/home/{{ username }}/.password-store"
+    cp -r /tmp/decrypted_lutices/.password-store "/home/{{ username }}/"
+    

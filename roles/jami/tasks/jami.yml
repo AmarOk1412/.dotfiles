@@ -24,6 +24,12 @@
     cmd: ./make-ring.py --dependencies
     chdir: /home/{{ username }}/Projects/jami
 
+- name: Install make
+  become: true
+  dnf:
+    name: make
+    state: latest
+
 - name: Build Jami
   shell:
     cmd: ./make-ring.py --install

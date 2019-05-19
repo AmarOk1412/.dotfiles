@@ -4,13 +4,21 @@
     name: thunderbird
     state: latest
 
+- name: Generate profile directory
+  command: "thunderbird -CreateProfile {{ username }}"
+
 - name: Get themes directory
-  command: ls /home/{{ username }}/.thunderbird/ | grep .default
+  shell: "ls /home/{{ username }}/.thunderbird/ | grep {{ username }}"
   register: thunderbird_themes_dir
 
 - name: Clone Monterail
   git:
     repo: git@github.com:spymastermatt/thunderbird-monterail.git
-    dest: {{ thunderbird_themes_dir }}
+    dest: "/home/{{ username }}/.thunderbird/{{ thunderbird_themes_dir.stdout }}/chrome"
     accept_hostkey: yes
     force: yes
+
+- name: Set Monterail theme
+  copy:
+    src: "/home/{{ username }}/.thunderbird/{{ thunderbird_themes_dir.stdout }}/chrome/themes/monterail.css"
+    dest: "/home/{{ username }}/.thunderbird/{{ thunderbird_themes_dir.stdout }}/chrome/userChrome.css"

@@ -3,3 +3,42 @@
   dnf:
     name: i3
     state: latest
+
+- name: Install nitrogen
+  become: true
+  dnf:
+    name: nitrogen
+    state: latest
+
+- name: Install fontawesome-fonts
+  become: true
+  dnf:
+    name: fontawesome-fonts
+    state: latest
+
+- name: Install rofi
+  become: true
+  dnf:
+    name: rofi
+    state: latest
+
+- name: Install i3lock
+  become: true
+  dnf:
+    name: i3lock
+    state: latest
+
+- name: Create /home/{{ username }}/.config
+  file:
+      path: /home/{{ username }}/.config
+      state: directory
+
+- name: Configure i3
+  shell: |
+    rm -rf "/home/{{ username }}/.config/i3"
+    cp -r .config/i3 "/home/{{ username }}/.config/i3"
+
+- name: Configure rofi
+  shell: |
+    rm -rf "/home/{{ username }}/.config/rofi"
+    cp -r .config/rofi "/home/{{ username }}/.config/rofi"

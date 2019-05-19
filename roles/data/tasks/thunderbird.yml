@@ -1,0 +1,7 @@
+- name: Remove old config
+  file:
+    state: absent
+    path: "/home/{{ username }}/.thunderbird"
+
+- name: Copy thunderbird config
+  shell: "cp -r /tmp/decrypted_lutices/.thunderbird /home/{{ username }}/.thunderbird"

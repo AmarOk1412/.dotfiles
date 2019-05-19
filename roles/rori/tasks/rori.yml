@@ -1,0 +1,39 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+- name: Clone RORI
+  git:
+    repo: git@github.com:AmarOk1412/RORI.git
+    dest: "/home/{{ username }}/Projects/RORI"
+    accept_hostkey: yes
+    force: yes
+    track_submodules: yes
+    recursive: yes
+
+- name: Install dependencies
+  become: true
+  shell:
+    cmd: make dependencies
+    chdir: "/home/{{ username }}/Projects/RORI/rori_core"
+
+- name: Build core
+  shell:
+    cmd: |
+      make keys
+      make build
+      python3 scripts/generate_modules.py
+    chdir: "/home/{{ username }}/Projects/RORI/rori_core"
+
+- name: Build Linux client
+  shell:
+    cmd: |
+      make mimic
+      make build
+    chdir: "/home/{{ username }}/Projects/RORI/clients/rori_linux_client"
+
+- name: Build Discord client
+  shell:
+    cmd: make build
+    chdir: "/home/{{ username }}/Projects/RORI/clients/rori_discord_bot"

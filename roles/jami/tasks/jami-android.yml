@@ -1,0 +1,102 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+- name: Clone Jami for android
+  git:
+    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project
+    dest: /home/{{ username }}/Projects/jami-android
+    accept_hostkey: yes
+    force: yes
+    recursive: no
+
+- name: Init submodules
+  shell:
+    cmd: ./make-ring.py --init
+    chdir: /home/{{ username }}/Projects/jami-android
+
+- name: Download Latest Android studio
+  get_url:
+    url: https://dl.google.com/dl/android/studio/ide-zips/3.4.1.0/android-studio-ide-183.5522156-linux.tar.gz #TODO latest
+    dest: /tmp/android-studio.tar.gz
+    mode: 0600
+
+- name: Un-tar android-studio
+  become: true
+  unarchive:
+    src: /tmp/android-studio.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Install java-1.8.0-openjdk
+  become: true
+  dnf:
+    name: java-1.8.0-openjdk
+    state: latest
+
+- name: set ANDROID_HOME
+  become: true
+  lineinfile:
+    dest: "/home/{{ username }}/.zshrc"
+    state: present
+    regexp: "^ANDROID_HOME"
+    line: "ANDROID_HOME=/home/{{ username }}/Android/Sdk"
+
+- name: set PATH
+  become: true
+  lineinfile:
+    dest: "/home/{{ username }}/.zshrc"
+    state: present
+    regexp: "^PATH"
+    line: "PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:${ANDROID_HOME}/tools/bin"
+
+- name: Update manager
+  shell: echo $PATH && (while sleep 1; do echo "y"; done) | sdkmanager --update
+  environment:
+    PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/{{ username }}/Android/Sdk/tools/bin"
+
+- name: set ANDROID_SDK
+  become: true
+  lineinfile:
+    dest: "/home/{{ username }}/.zshrc"
+    state: present
+    regexp: "^ANDROID_SDK"
+    line: "ANDROID_SDK=${ANDROID_HOME}"
+
+- name: set ANDROID_NDK
+  become: true
+  lineinfile:
+    dest: "/home/{{ username }}/.zshrc"
+    state: present
+    regexp: "^ANDROID_NDK"
+    line: "ANDROID_NDK=${ANDROID_HOME}/ndk-bundle"
+
+- name: Install dependencies
+  become: true
+  shell:
+    cmd: ./make-ring.py --dependencies --distribution=Android
+    chdir: /home/{{ username }}/Projects/jami
+  ignore_errors: yes
+
+- name: Install make
+  become: true
+  dnf:
+    name: make
+    state: latest
+
+ - name: Install ndk-bundle
+   shell: echo $PATH && (while sleep 1; do echo "y"; done) | sdkmanager ndk-bundle
+   environment:
+     PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/{{ username }}/Android/Sdk/tools/bin"
+
+- name: Build Jami
+  shell:
+    cmd: ./make-ring.py --install --distribution=Android
+    chdir: /home/{{ username }}/Projects/jami-android
+  environment:
+    ANDROID_ABI: "armeabi-v7a arm64-v8a"
+    ANDROID_HOME: "/home/{{ username }}/Android/Sdk"
+    ANDROID_SDK: "/home/{{ username }}/Android/Sdk"
+    ANDROID_NDK: "/home/{{ username }}/Android/Sdk/ndk-bundle"
+    PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/{{ username }}/Android/Sdk/tools/bin"

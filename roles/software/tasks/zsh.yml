@@ -4,6 +4,36 @@
     name: zsh
     state: latest
 
+- name: Install fortune-mod
+  become: true
+  dnf:
+    name: fortune-mod
+    state: latest
+
+- name: Install autojump-zsh
+  become: true
+  dnf:
+    name: autojump-zsh
+    state: latest
+
 - name: Change user shell to zsh
   user: name={{ username }} shell=/bin/zsh
   become: true
+
+- name: Install Oh-My-Zsh
+  git:
+    repo: git@github.com:robbyrussell/oh-my-zsh.git
+    dest: /home/{{ username }}/.oh-my-zsh
+    accept_hostkey: yes
+    force: yes
+
+- name: Install zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "/home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    force: yes
+
+- name: Copy zsh
+  copy:
+    src: .zshrc
+    dest: "/home/{{ username }}/.zshrc"

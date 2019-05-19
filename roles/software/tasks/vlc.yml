@@ -1,0 +1,19 @@
+---
+- name: Get Fedora version
+  shell: rpm -E %fedora
+  register: fedora_current
+
+- name: Add RpmFusion
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current.stdout }}.noarch.rpm
+    - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current.stdout }}.noarch.rpm
+
+- name: Install vlc
+  become: true
+  dnf:
+    name: vlc
+    state: latest

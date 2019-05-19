@@ -1,0 +1,10 @@
+- include: gpg.yml
+  tags: gpg
+
+- include: pass.yml
+  tags: pass
+
+- include: thunderbird.yml
+
+- include: minimal_data.yml
+  tags: minimal_data

@@ -1,2 +1,4 @@
 - include: jami.yml
   tags: jami
+- include: jami-android.yml
+  tags: jami

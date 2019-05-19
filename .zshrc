@@ -1,8 +1,8 @@
-export ZSH=/home/amarok/.oh-my-zsh
+export ZSH=/home/AmarOk/.oh-my-zsh
 ZSH_THEME="agnoster"
 
 plugins=(autojump catimg chucknorris 
-common-aliases django dnf git gpg-agent jsontools lol mercurial node npm nyan pass pep8 pyenv python 
+common-aliases django dnf git gpg-agent jsontools lol mercurial node npm pass pep8 pyenv python 
 ssh-agent sudo web-search zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
@@ -33,6 +33,11 @@ alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
+
+alias ls="/usr/bin/exa"
+alias grep="/usr/bin/rg"
+alias cat="/usr/bin/bat"
+alias find="/usr/bin/fd"
 
 # Meteo
 function meteo () { [[ $1 ]] && curl wttr.in/$1 || curl wttr.in/Montréal; }

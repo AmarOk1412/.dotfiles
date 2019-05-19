@@ -1,0 +1,32 @@
+---
+- name: Install wget
+  become: true
+  dnf:
+    name: wget
+    state: latest
+
+- name: Download Latest Firefox Nightly
+  get_url:
+    url: https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US
+    dest: /tmp/firefox-nightly.tar.gz
+    mode: 0600
+
+- name: Un-tar firefox-nightly
+  become: true
+  unarchive:
+    src: /tmp/firefox-nightly.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Rename /opt/firefox => /opt/firefox-nightly
+  become: true
+  command: mv /opt/firefox /opt/firefox-nightly
+
+- name: Add firefox-nightly to PATH
+  become: true
+  file:
+    src: /opt/firefox-nightly/firefox
+    dest: /usr/bin/firefox-nightly
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: link

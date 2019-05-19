@@ -2,16 +2,37 @@
   tags: update
 - include: ansible.yml
 - include: docker.yml
+  tags: docker
+- include: firefox-nightly.yml
+  tags: firefox-nightly
+- include: fractal.yml
+  tags:
+    - fractal
+    - update
 - include: gimp.yml
+- include: git.yml
+  tags: git
 - include: gnupg2.yml
+- include: htop.yml
 - include: i3.yml
+  tags: i3
 - include: rust.yml
   tags: update
 - include: rust-linux-tools.yml
+- include: screenfetch.yml
+  tags: screenfetch
+- include: synergy.yml
+  tags: synergy
 - include: thunderbird.yml
+  tags: thunderbird
 - include: vscodium.yml
   tags:
     - vscodium
     - update
+- include: vlc.yml
+  tags: vlc
 - include: zsh.yml
   tags: zsh
+
+- include: nvidia-drivers-xps.yml
+  tags: nvidia-shit

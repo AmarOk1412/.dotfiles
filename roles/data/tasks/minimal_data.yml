@@ -1,0 +1,9 @@
+- name: Retrieve password from decrypted backup
+  shell: |
+    rm -rf "/home/{{ username }}/Pictures/avatars"
+    cp -r /tmp/decrypted_lutices/Pictures/avatars "/home/{{ username }}/Pictures/avatars"
+    rm -rf "/home/{{ username }}/Pictures/wallpapers"
+    cp -r /tmp/decrypted_lutices/Pictures/wallpapers "/home/{{ username }}/Pictures/wallpapers"
+    rm -rf "/home/{{ username }}/TODOLists"
+    cp -r /tmp/decrypted_lutices/TODOLists "/home/{{ username }}/TODOLists"
+    

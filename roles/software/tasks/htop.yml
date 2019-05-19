@@ -1,0 +1,5 @@
+- name: Install htop
+  become: true
+  dnf:
+    name: htop
+    state: latest

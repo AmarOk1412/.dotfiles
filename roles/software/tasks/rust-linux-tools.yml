@@ -1,11 +1,24 @@
 - name: Install bat
-  command: cargo install bat
+  become: true
+  dnf:
+    name: bat
+    state: latest
 
 - name: Install exa
-  command: cargo install exa
+  become: true
+  dnf:
+    name: exa
+    state: latest
 
 - name: Install fd-find
-  command: cargo install fd-find
+  become: true
+  dnf:
+    name: fd-find
+    state: latest
 
 - name: Install ripgrep
-  command: cargo install ripgrep
+  become: true
+  dnf:
+    name: ripgrep
+    state: latest
+

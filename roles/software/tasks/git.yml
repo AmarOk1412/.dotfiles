@@ -1,0 +1,10 @@
+- name: Install git
+  become: true
+  dnf:
+    name: git
+    state: latest
+
+- name: Configure git
+  copy:
+    src: ".gitconfig"
+    dest: "/home/{{ username }}/.gitconfig"

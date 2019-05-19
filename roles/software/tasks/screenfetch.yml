@@ -1,0 +1,5 @@
+- name: Install screenfetch
+  become: true
+  dnf:
+    name: screenfetch
+    state: latest

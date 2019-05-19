@@ -1,0 +1,11 @@
+- name: Add the flathub flatpak repository remote to the user installation
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: Install fractal
+  flatpak:
+    name: org.gnome.Fractal
+    state: present

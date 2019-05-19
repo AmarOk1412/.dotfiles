@@ -1,0 +1,46 @@
+- name: Enable negativo17 repo
+  become: true
+  command: dnf config-manager --add-repo=https://negativo17.org/repos/fedora-nvidia.repo
+
+- name: Install nvidia-driver
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items: [nvidia-driver, kernel-devel, akmod-nvidia, dkms, acpi]
+
+- name: Enable copr for Bumblebee
+  become: true
+  command: dnf copr enable chenxiaolong/bumblebee -y
+
+- name: Install Bumblebee
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items: [akmod-bbswitch, bumblebee, primus]
+
+- name: Add user to bumblebee group
+  become: true
+  user:
+    name: "{{ username }}"
+    groups: bumblebee
+    append: yes
+
+- name: Enable bumblebeed service
+  become: true
+  systemd:
+    name: bumblebeed
+    enabled: yes
+    masked: no
+
+- name: Fix grub config
+  become: true
+  replace:
+    path: /etc/default/grub
+    regexp: ' rhgb '
+    replace: ' rhgb acpi_rev_override pcie_port_pm=off '
+
+- name: Regenerate grub config
+  become: true
+  command: grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
