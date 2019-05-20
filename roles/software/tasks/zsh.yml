@@ -10,6 +10,12 @@
     name: fortune-mod
     state: latest
 
+- name: Install ImageMagick
+  become: true
+  dnf:
+    name: ImageMagick
+    state: latest
+
 - name: Install autojump-zsh
   become: true
   dnf:
