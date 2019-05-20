@@ -85,10 +85,10 @@
     name: make
     state: latest
 
- - name: Install ndk-bundle
-   shell: echo $PATH && (while sleep 1; do echo "y"; done) | sdkmanager ndk-bundle
-   environment:
-     PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/{{ username }}/Android/Sdk/tools/bin"
+- name: Install ndk-bundle
+  shell: echo $PATH && (while sleep 1; do echo "y"; done) | sdkmanager ndk-bundle
+  environment:
+    PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/{{ username }}/Android/Sdk/tools/bin"
 
 - name: Build Jami
   shell:

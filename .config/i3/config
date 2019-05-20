@@ -63,7 +63,7 @@ bindsym $mod+Return exec gnome-terminal
 bindsym $mod+t exec thunderbird
 bindsym $mod+n exec firefox-nightly
 bindsym $mod+a exec atom
-bindsym $mod+g exec "python3 /home/AmarOk/.config/sway/magicgo.py" # TODO...
+bindsym $mod+g exec "python3 /home/AmarOk/.config/i3/magicgo.py"
 
 # kill focused window
 bindsym $alt+F4 kill

@@ -1,5 +1,14 @@
+#! /usr/bin/env python3
+
 from subprocess import check_output, Popen
 import re
+
+def get_path(path):
+    path = path.strip()
+    if path[-1] != '/':
+            path += '/'
+    path = path.replace("~", "/home/AmarOk")
+    return path
 
 # Utils
 urlre = re.compile(
@@ -27,17 +36,21 @@ else:
     # 2. Try to determine a path
     if 'gedit' in current_window:
         pwd = geditre.match(current_window)[1]
-        Popen(['atom', pwd + current_selection])
+        Popen(['xdg-open', f'{pwd}{current_selection}'])
     elif 'Atom' in current_window:
         pwd = atomre.match(current_window)[1]
-        if pwd[-1] != '/':
-            pwd += '/'
-        Popen(['atom', pwd + current_selection])
+        pwd = get_path(pwd)
+        Popen(['xdg-open', f'{pwd}{current_selection}'])
+    elif 'VSCodium' in current_window:
+        pwd = atomre.match(current_window)[1]
+        pwd = get_path(pwd)
+        Popen(['xdg-open', f'{pwd}{current_selection}'])
+    elif '@' in current_window and ':' in current_window:
+        pwd = current_window.split(' ')[-1].strip()
+        pwd = get_path(pwd)
+        Popen(['xdg-open', f'{pwd}{current_selection}'])
     else:
         # Try with the last info
         pwd = current_window.split(' ')[-1]
-        if pwd[-1] == '\n':
-            pwd = pwd[:-1]
-        if pwd[-1] != '/':
-            pwd += '/'
-        Popen(['atom', pwd + current_selection])
+        pwd = get_path(pwd)
+        Popen(['xdg-open', f'{pwd}{current_selection}'])

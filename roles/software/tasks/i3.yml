@@ -28,6 +28,18 @@
     name: i3lock
     state: latest
 
+- name: Install xsel
+  become: true
+  dnf:
+    name: xsel
+    state: latest
+
+- name: Install xdotool
+  become: true
+  dnf:
+    name: xdotool
+    state: latest
+
 - name: Create /home/{{ username }}/.config
   file:
       path: /home/{{ username }}/.config
