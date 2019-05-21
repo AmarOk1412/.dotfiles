@@ -31,6 +31,8 @@
     - update
 - include: vlc.yml
   tags: vlc
+- include: wireshark.yml
+  tags: wireshark
 - include: zsh.yml
   tags: zsh
 

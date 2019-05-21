@@ -30,6 +30,12 @@
     name: make
     state: latest
 
+- name: Install cppunit-devel
+  become: true
+  dnf:
+    name: cppunit-devel
+    state: latest
+
 - name: Build Jami
   shell:
     cmd: ./make-ring.py --install

@@ -40,6 +40,12 @@
     name: xdotool
     state: latest
 
+- name: Install  network-manager-applet
+  become: true
+  dnf:
+    name: network-manager-applet
+    state: latest
+
 - name: Create /home/{{ username }}/.config
   file:
       path: /home/{{ username }}/.config

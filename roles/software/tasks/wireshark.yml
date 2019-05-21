@@ -1,0 +1,14 @@
+---
+
+- name: Install wireshark
+  become: true
+  dnf:
+    name: wireshark
+    state: latest
+
+- name: Add user to wireshark group
+  become: true
+  user:
+    name: "{{ username }}"
+    groups: wireshark
+    append: yes
