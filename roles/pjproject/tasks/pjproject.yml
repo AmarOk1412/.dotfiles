@@ -1,0 +1,29 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+
+- name: Clone pjproject
+  git:
+    repo: git@github.com:pjsip/pjproject.git
+    dest: "/home/{{ username }}/Projects/pjproject"
+    accept_hostkey: yes
+    force: yes
+    track_submodules: yes
+    recursive: yes
+
+- name: Configure pjproject
+  shell:
+    cmd: ./configure
+    chdir: /home/{{ username }}/Projects/pjproject
+
+- name: Build pjproject dependencies
+  shell:
+    cmd: make dep -j9
+    chdir: /home/{{ username }}/Projects/pjproject
+
+- name: Build pjproject
+  shell:
+    cmd: make -j9
+    chdir: /home/{{ username }}/Projects/pjproject
