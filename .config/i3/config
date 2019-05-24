@@ -54,7 +54,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym --release Print exec "scrot /home/AmarOk/Pictures/$(date +%m-%d-%y-%T).png"
 
 # lock
-bindsym $mod+Ctrl+l exec i3lock
+bindsym $mod+l exec i3lock
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
@@ -72,10 +72,10 @@ bindsym $alt+F4 kill
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
+bindsym $mod+Ctrl+j focus left
+bindsym $mod+Ctrl+k focus down
+bindsym $mod+Ctrl+l focus up
+bindsym $mod+Ctrl+m focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
