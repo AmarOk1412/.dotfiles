@@ -1,0 +1,5 @@
+- name: Install redshift
+  become: true
+  dnf:
+    name: redshift
+    state: latest

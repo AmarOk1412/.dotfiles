@@ -5,6 +5,18 @@
     name: wget
     state: latest
 
+- name: Assert that /opt/firefox is absent
+  become: true
+  file:
+    state: absent
+    path: /opt/firefox
+
+- name: Assert that /opt/firefox-nightly is absent
+  become: true
+  file:
+    state: absent
+    path: /opt/firefox-nightly
+
 - name: Download Latest Firefox Nightly
   get_url:
     url: https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US

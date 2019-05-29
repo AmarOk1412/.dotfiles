@@ -4,7 +4,9 @@
 - include: docker.yml
   tags: docker
 - include: firefox-nightly.yml
-  tags: firefox-nightly
+  tags:
+    - firefox-nightly
+    - update
 - include: fractal.yml
   tags:
     - fractal
@@ -16,6 +18,8 @@
 - include: htop.yml
 - include: i3.yml
   tags: i3
+- include: redshift.yml
+  tags: redshift
 - include: rust.yml
   tags: update
 - include: rust-linux-tools.yml
