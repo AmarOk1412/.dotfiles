@@ -1,0 +1,25 @@
+- name: Create /home/{{ username }}/Projects
+  file:
+      path: /home/{{ username }}/Projects
+      state: directory
+
+- name: Clone Enconn
+  git:
+    repo: git@github.com:AmarOk1412/Enconn.git
+    dest: /home/{{ username }}/Projects/Enconn
+    accept_hostkey: yes
+    force: yes
+
+- name: Clone beautifulhugo
+  git:
+    repo: git@github.com:halogenica/beautifulhugo.git
+    dest: /home/{{ username }}/Projects/Enconn/themes/beautifulhugo
+    accept_hostkey: yes
+    force: yes
+
+- name: Clone AmarOk1412.github.io
+  git:
+    repo: git@github.com:AmarOk1412/AmarOk1412.github.io.git
+    dest: /home/{{ username }}/Projects/AmarOk1412.github.io
+    accept_hostkey: yes
+    force: yes

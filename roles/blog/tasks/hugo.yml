@@ -1,0 +1,5 @@
+- name: Install hugo
+  become: true
+  dnf:
+    name: hugo
+    state: latest
