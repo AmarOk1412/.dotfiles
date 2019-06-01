@@ -4,6 +4,7 @@
   hosts: localhost
   vars:
     - username: AmarOk
+    - hostname: tars3
   roles:
     - info
     - software
@@ -13,4 +14,3 @@
     - rori
     - pjproject
     - blog
-    

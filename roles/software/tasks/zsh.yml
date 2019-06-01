@@ -32,6 +32,7 @@
     dest: /home/{{ username }}/.oh-my-zsh
     accept_hostkey: yes
     force: yes
+    depth: 1
 
 - name: Install zsh-autosuggestions
   git:

@@ -1,0 +1,5 @@
+- name: Install weechat
+  become: true
+  dnf:
+    name: weechat
+    state: latest

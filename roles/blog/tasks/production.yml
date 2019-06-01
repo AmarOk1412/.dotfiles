@@ -1,0 +1,42 @@
+- name: Add user to nginx group
+  become: true
+  user:
+    name: "{{ username }}"
+    groups: nginx
+    append: yes
+
+- name: Create /var/www/
+  become: true
+  file:
+      path: /var/www/
+      state: directory
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      mode: '0750'
+
+- name: Clone Enconn
+  git:
+    repo: git@github.com:AmarOk1412/AmarOk1412.github.io.git
+    dest: /var/www/enconn
+    accept_hostkey: yes
+    force: yes
+
+- name: Fix permissions /var/www/enconn
+  become: true
+  file:
+      path: /var/www/enconn
+      state: directory
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      recurse: yes
+      mode: mode=u=rwX,g=rX
+
+- name: Embrace SE Linux fun
+  command: chcon -R -t httpd_sys_content_t /var/www/enconn
+
+- name: Configure firewalld
+  become: true
+  shell: |
+    firewall-cmd --add-port=80/tcp --permanent
+    firewall-cmd --add-port=443/tcp --permanent
+    firewall-cmd reload

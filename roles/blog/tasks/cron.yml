@@ -1,0 +1,45 @@
+
+- name: Add cron to update site
+  cron:
+    name: "Update website"
+    user: "{{ username }}"
+    minute: "1"
+    hour: "*/3"
+    job: "cd /var/www/enconn && git pull"
+
+- name: Create /opt/scripts
+  become: true
+  file:
+      path: /opt/scripts
+      state: directory
+      mode: '0750'
+
+- name: Create /opt/scripts/livedns
+  become: true
+  file:
+      path: /opt/scripts/livedns
+      state: directory
+      mode: '0750'
+
+- name: Copy livedns script
+  become: true
+  copy:
+    src: "scripts/livedns/livedns.py"
+    dest: "/opt/scripts/livedns/livedns.py"
+    mode: '0700'
+
+- name: Copy config.py for livedns
+  become: true
+  copy:
+    src: "/tmp/decrypted_lutices/scripts/livedns/config.py"
+    dest: "/opt/scripts/livedns/config.py"
+    mode: '0700'
+
+
+- name: Add cron to update DNS
+  become: true
+  cron:
+    name: "Update DNS"
+    user: "root"
+    minute: "*/3"
+    job: "cd /opt/scripts/livedns && ./livedns.py"

@@ -1,5 +1,7 @@
 - include: update.yml
-  tags: update
+  tags:
+    - update
+    - update_server
 - include: ansible.yml
 - include: docker.yml
   tags: docker
@@ -13,32 +15,61 @@
     - update
 - include: gimp.yml
 - include: git.yml
-  tags: git
+  tags:
+    - git
+    - server
 - include: gnupg2.yml
 - include: htop.yml
+  tags: server
 - include: i3.yml
   tags: i3
 - include: redshift.yml
   tags: redshift
 - include: rust.yml
-  tags: update
+  tags:
+    - update
+    - server
+    - server_update
+    - rust
 - include: rust-linux-tools.yml
+  tags:
+    - server
+    - server_update
+    - rust
 - include: screenfetch.yml
   tags: screenfetch
 - include: synergy.yml
   tags: synergy
 - include: thunderbird.yml
   tags: thunderbird
+- include: tmux.yml
+  tags:
+    - tmux
+    - server
 - include: vscodium.yml
   tags:
     - vscodium
     - update
 - include: vlc.yml
   tags: vlc
+- include: weechat.yml
+  tags:
+    - weechat
+    - server
 - include: wireshark.yml
   tags: wireshark
 - include: zsh.yml
-  tags: zsh
+  ignore_errors: true
+  tags:
+    - zsh
+    - server
 
+# For Dell
 - include: nvidia-drivers-xps.yml
   tags: nvidia-shit
+
+# For Server
+- include: ssh-key-only.yml
+  tags:
+    - server_specific
+    - server

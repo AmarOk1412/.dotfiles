@@ -1,2 +1,7 @@
+- name: "change hostname to {{ hostname }}"
+  become: true
+  hostname:
+    name: "{{ hostname }}"
+
 - name: print out the hostname of target
   command: hostname

@@ -1,0 +1,27 @@
+- name: Enable Auth via key
+  become: true
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '#PubkeyAuthentication yes'
+    replace: 'PubkeyAuthentication yes'
+
+- name: Disable Root Login
+  become: true
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: 'PermitRootLogin yes'
+    replace: 'PermitRootLogin no'
+
+- name: Disable Password Login
+  become: true
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: 'PasswordAuthentication yes'
+    replace: 'PasswordAuthentication no'
+
+- name: Restart sshd
+  become: true
+  systemd:
+    name: sshd
+    enabled: yes
+    masked: no

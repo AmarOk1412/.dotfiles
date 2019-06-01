@@ -2,3 +2,12 @@
   tags: blog
 - include: blog.yml
   tags: blog
+- include: production.yml
+  tags:
+    - server
+    - server_specific
+- include: cron.yml
+  tags:
+    - server
+    - cron
+    - server_specific
