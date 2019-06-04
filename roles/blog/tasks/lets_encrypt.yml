@@ -1,0 +1,24 @@
+- name: Install certbot
+  become: true
+  dnf:
+    name: certbot
+    state: latest
+
+- name: Install certbot-nginx
+  become: true
+  dnf:
+    name: certbot-nginx
+    state: latest
+
+- name: Generate certificate
+  become: true
+  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d {{ hostname }}"
+
+- name: Add cron to update certificate
+  become: true
+  cron:
+    name: "Update certificate"
+    user: "root"
+    minute: "0"
+    hour: "0,12"
+    job: "python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew"

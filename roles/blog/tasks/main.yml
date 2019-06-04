@@ -11,3 +11,8 @@
     - server
     - cron
     - server_specific
+- include: lets_encrypt.yml
+  tags:
+    - server
+    - lets_encrypt
+    - server_specific

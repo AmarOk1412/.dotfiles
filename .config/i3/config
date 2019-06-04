@@ -54,7 +54,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym --release Print exec "scrot /home/AmarOk/Pictures/$(date +%m-%d-%y-%T).png"
 
 # lock
-bindsym $mod+l exec i3lock
+bindsym $mod+l exec "i3lock -i /home/AmarOk/.config/i3/lock_screen.png"
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal

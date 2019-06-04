@@ -7,6 +7,8 @@
   vars:
     - username: AmarOk
     - hostname: enconn.fr
+    - lets_encrypt_mail: contact@enconn.fr
+    - ansible_ssh_private_key_file: "/home/AmarOk/.ssh/enconn.fr"
   roles:
     #- info
     - software
