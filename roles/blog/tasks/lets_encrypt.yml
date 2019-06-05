@@ -1,3 +1,9 @@
+- name: Install nginx
+  become: true
+  dnf:
+    name: nginx
+    state: latest
+
 - name: Install certbot
   become: true
   dnf:
