@@ -16,3 +16,8 @@
     - server
     - lets_encrypt
     - server_specific
+- include: nameserver.yml
+  tags:
+    - server
+    - nameserver
+    - server_specific

@@ -1,0 +1,11 @@
+- name: Create /var/www/enconn/name
+  file:
+      path: /var/www/enconn/name
+      state: directory
+      mode: 0755
+
+- name: Copy amarok json for Jami
+  copy:
+    src: "name/amarok"
+    dest: "/var/www/enconn/name/amarok"
+    mode: 0644
