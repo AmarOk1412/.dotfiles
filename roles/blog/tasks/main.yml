@@ -11,6 +11,11 @@
     - server
     - cron
     - server_specific
+- include: media.enconn.fr.yml
+  tags:
+    - server
+    - media.enconn.fr
+    - server_specific
 - include: lets_encrypt.yml
   tags:
     - server
