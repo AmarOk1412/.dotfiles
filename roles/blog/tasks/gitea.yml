@@ -1,0 +1,55 @@
+- name: Add user git
+  become: true
+  user:
+    name: git
+    shell: /bin/bash
+    home: /home/git
+    system: yes
+
+- name: Download Gitea
+  become: true
+  get_url:
+    url: https://dl.gitea.io/gitea/1.8/gitea-1.8-linux-arm-6
+    dest: /usr/local/bin/gitea
+    mode: 0770
+
+- name: Prepare gitea environment
+  become: true
+  shell: |
+    mkdir -p /var/lib/gitea/{custom,data,log}
+    chown -R git:git /var/lib/gitea/
+    chmod -R 750 /var/lib/gitea/
+    mkdir /etc/gitea
+    chown root:git /etc/gitea
+    chmod 770 /etc/gitea
+    chown root:git /usr/local/bin/gitea
+
+- name: Copy gitea service
+  become: true
+  copy:
+    src: ".config/gitea/gitea.service"
+    dest: "/etc/systemd/system/gitea.service"
+    mode: '0700'
+
+- name: Enable gitea service
+  become: true
+  systemd:
+    name: gitea
+    enabled: yes
+    masked: no
+
+- name: Generate certificate
+  become: true
+  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d code.enconn.fr"
+
+- name: Fix permissions by locking config
+  become: true
+  shell: |
+    chmod 750 /etc/gitea
+    chmod 644 /etc/gitea/app.ini
+    chown -R nginx:nginx /var/lib/nginx/
+
+- name: SELinux proxy
+  become: true
+  shell: |
+    setsebool -P httpd_can_network_connect 1

@@ -26,3 +26,8 @@
     - server
     - nameserver
     - server_specific
+- include: gitea.yml
+  tags:
+    - server
+    - gitea
+    - server_specific
