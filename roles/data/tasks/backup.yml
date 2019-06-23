@@ -1,0 +1,9 @@
+
+- name: Add cron to backup computer
+  cron:
+    name: "Backup"
+    user: "{{ username }}"
+    minute: "1"
+    hour: "1"
+    weekday: "7"
+    job: "sh /home/{{ username }}/.dotfiles/scripts/backup.sh"

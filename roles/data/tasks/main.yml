@@ -8,3 +8,12 @@
 
 - include: minimal_data.yml
   tags: minimal_data
+
+- include: backup.yml
+  tags: backup
+
+- include: backup_server.yml
+  tags:
+    - backup
+    - server
+    - server_only
