@@ -27,7 +27,7 @@
     user: "root"
     minute: "0"
     hour: "0,12"
-    job: "python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew"
+    job: "certbot renew"
 
 - name: Fix 404 error page
   become: true
