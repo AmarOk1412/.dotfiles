@@ -29,14 +29,6 @@
     hour: "0,12"
     job: "certbot renew"
 
-- name: Fix 404 error page
-  become: true
-  lineinfile:
-    dest: "/etc/nginx/conf.d/enconn.fr.conf"
-    state: present
-    regexp: "index.html;"
-    line: "    index          index.html;\n    error_page     404 /404.html;"
-
 - name: Restart nginx
   become: true
   systemd:

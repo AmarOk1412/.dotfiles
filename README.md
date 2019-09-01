@@ -36,6 +36,11 @@ ansible-playbook playbook.yml -K --extra-vars "ldap=<my_ldap>"
 ```
 6. Drink maté
 
+For the server:
+```
+ansible-playbook playbook_enconn.yml -u amarok -i hosts
+```
+
 # Lutices
 
 Lutices is the name of my luks2 encrypted back-up.

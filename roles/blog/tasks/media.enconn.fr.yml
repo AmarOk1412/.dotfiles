@@ -3,14 +3,16 @@
   copy:
     remote_src: yes
     src: "/tmp/decrypted_lutices/media.enconn.fr/.htpasswd"
-    dest: "/home/{{ username }}/media.enconn.fr/.htpasswd"
+    dest: "/media/.htpasswd"
     mode: '0644'
 
 - name: Embrace SE Linux fun for media
+  become: true
   command: chcon -R -t httpd_sys_content_t /media/media_drive/
 
 - name: Embrace SE Linux fun for htpasswd
-  command: chcon -R -t httpd_sys_content_t /home/{{ username }}/media.enconn.fr
+  become: true
+  command: chcon -R -t httpd_sys_content_t /media/media_drive/.htpasswd
 
 - name: Generate certificate
   become: true

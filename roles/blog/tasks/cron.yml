@@ -31,10 +31,10 @@
 - name: Copy config.py for livedns
   become: true
   copy:
+    remote_src: yes
     src: "/tmp/decrypted_lutices/scripts/livedns/config.py"
     dest: "/opt/scripts/livedns/config.py"
     mode: '0700'
-
 
 - name: Add cron to update DNS
   become: true

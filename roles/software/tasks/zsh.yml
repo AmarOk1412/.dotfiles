@@ -28,7 +28,7 @@
 
 - name: Install Oh-My-Zsh
   git:
-    repo: git@github.com:robbyrussell/oh-my-zsh.git
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: /home/{{ username }}/.oh-my-zsh
     accept_hostkey: yes
     force: yes
