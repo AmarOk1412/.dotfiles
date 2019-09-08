@@ -5,7 +5,7 @@
     state: latest
 
 - name: Generate profile directory
-  command: "thunderbird -CreateProfile {{ username }}"
+  shell: "DISPLAY=:0 thunderbird -CreateProfile {{ username }}"
 
 - name: Get themes directory
   shell: "ls /home/{{ username }}/.thunderbird/ | grep {{ username }}"

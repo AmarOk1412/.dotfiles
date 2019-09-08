@@ -73,3 +73,7 @@
   tags:
     - server_specific
     - server
+
+- include: virtualization.yml
+  tags:
+    - virtualization

@@ -1,0 +1,17 @@
+---
+
+- name: Configure device
+  hosts: work
+  vars:
+    - username: amarok
+    - hostname: atlas
+    - ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - info
+    - software
+    - jami
+    - wabi
+    - data
+    - rori
+    - pjproject
+    - blog

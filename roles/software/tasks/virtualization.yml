@@ -1,0 +1,5 @@
+- name: install libvirt
+  become: true
+  dnf:
+      name: '@virtualization'
+      state: present

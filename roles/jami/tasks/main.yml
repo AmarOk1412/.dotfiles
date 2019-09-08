@@ -1,7 +1,7 @@
 - include: jami.yml
   tags: jami
 - include: jami-android.yml
-  tags: jami
+  tags: jami-android
 - include: opendht.yml
   tags:
     - opendht

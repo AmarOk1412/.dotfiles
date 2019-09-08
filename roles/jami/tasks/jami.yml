@@ -5,7 +5,7 @@
 
 - name: Clone Jami
   git:
-    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project
+    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project.git
     dest: /home/{{ username }}/Projects/jami
     accept_hostkey: yes
     force: yes

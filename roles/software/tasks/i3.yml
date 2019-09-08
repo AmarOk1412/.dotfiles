@@ -54,9 +54,19 @@
 - name: Configure i3
   shell: |
     rm -rf "/home/{{ username }}/.config/i3"
-    cp -r .config/i3 "/home/{{ username }}/.config/i3"
+
+- name: Copy i3 config
+  copy:
+    src: .config/i3
+    dest: "/home/{{ username }}/.config/i3"
+    mode: '0644'
 
 - name: Configure rofi
   shell: |
     rm -rf "/home/{{ username }}/.config/rofi"
-    cp -r .config/rofi "/home/{{ username }}/.config/rofi"
+
+- name: Copy rofi config
+  copy:
+    src: .config/rofi
+    dest: "/home/{{ username }}/.config/rofi"
+    mode: '0644'

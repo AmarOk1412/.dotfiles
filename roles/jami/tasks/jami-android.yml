@@ -5,7 +5,7 @@
 
 - name: Clone Jami for android
   git:
-    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project
+    repo: ssh://{{ ldap }}@review.jami.net:29420/ring-project.git
     dest: /home/{{ username }}/Projects/jami-android
     accept_hostkey: yes
     force: yes
@@ -18,7 +18,7 @@
 
 - name: Download Latest Android studio
   get_url:
-    url: https://dl.google.com/dl/android/studio/ide-zips/3.4.1.0/android-studio-ide-183.5522156-linux.tar.gz #TODO latest
+    url: https://dl.google.com/dl/android/studio/ide-zips/3.5.0.21/android-studio-ide-191.5791312-linux.tar.gz #TODO latest
     dest: /tmp/android-studio.tar.gz
     mode: 0600
 
