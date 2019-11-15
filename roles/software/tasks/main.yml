@@ -65,8 +65,8 @@
     - server
 
 # For Dell
-- include: nvidia-drivers-xps.yml
-  tags: nvidia-shit
+#- include: nvidia-drivers-xps.yml
+#  tags: nvidia-shit
 
 # For Server
 - include: ssh-key-only.yml

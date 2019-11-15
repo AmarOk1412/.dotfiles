@@ -3,7 +3,7 @@
 - name: Configure device
   hosts: localhost
   vars:
-    - username: AmarOk
+    - username: amarok
     - hostname: tars3
   roles:
     - info

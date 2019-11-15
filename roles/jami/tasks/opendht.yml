@@ -29,6 +29,6 @@
 - name: Build OpenDHT
   shell:
     cmd: |
-      cmake -DOPENDHT_PYTHON=ON -DOPENDHT_TOOLS=ON ..
+      cmake -DOPENDHT_C=ON -DOPENDHT_PYTHON=ON -DOPENDHT_TOOLS=ON ..
       make -j9
     chdir: /home/{{ username }}/Projects/opendht/build
