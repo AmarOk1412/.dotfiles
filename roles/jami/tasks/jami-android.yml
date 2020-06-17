@@ -16,9 +16,15 @@
     cmd: ./make-ring.py --init
     chdir: /home/{{ username }}/Projects/jami-android
 
+- name: Recursively remove destination directory for android-studio
+  become: true
+  file:
+    path: /opt/android-studio
+    state: absent
+
 - name: Download Latest Android studio
   get_url:
-    url: https://dl.google.com/dl/android/studio/ide-zips/3.5.0.21/android-studio-ide-191.5791312-linux.tar.gz #TODO latest
+    url: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.0.0.16/android-studio-ide-193.6514223-linux.tar.gz #TODO latest
     dest: /tmp/android-studio.tar.gz
     mode: 0600
 

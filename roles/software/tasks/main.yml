@@ -77,3 +77,6 @@
 - include: virtualization.yml
   tags:
     - virtualization
+- include: yubikey.yml
+  tags:
+    - yubikey

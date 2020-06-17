@@ -1,0 +1,15 @@
+---
+
+- name: Install yubioath-desktop
+  become: true
+  dnf:
+    name: yubioath-desktop
+    state: latest
+
+- name: Install Yubikey Manager
+  become: true
+  get_url:
+    url: https://developers.yubico.com/yubikey-manager-qt/Releases/yubikey-manager-qt-latest-linux.AppImage
+    dest: /opt/yubikey.appimage
+    mode: 0777
+      
