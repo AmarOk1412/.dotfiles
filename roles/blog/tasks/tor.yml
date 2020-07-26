@@ -1,0 +1,43 @@
+- name: Install tor
+  become: true
+  dnf:
+    name: tor
+    state: latest
+
+- name: "Set Torrc"
+  become: true
+  copy:
+    src: "templates/torrc"
+    dest: "/etc/tor/torrc"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: "Create Tor HS directory"
+  become: true
+  file:
+    path: /var/lib/tor/v3_hidden_service
+    state: directory
+    owner: "toranon"
+    group: "toranon"
+    mode: u=rwx,g=,o=
+
+- name: get file stat to be able to perform a check in the following task
+  local_action: stat path=/tmp/decrypted_lutices/.key/hs_ed25519_secret_key
+  register: file
+
+- name: "Set Tor HS keys"
+  become: true
+  copy:
+    src: /tmp/decrypted_lutices/.key/hs_ed25519_secret_key
+    dest: /var/lib/tor/v3_hidden_service/hs_ed25519_secret_key
+    owner: "toranon"
+    group: "toranon"
+    mode: u=rw,g=,o=
+  when: file.stat.exists
+
+- name: "Restart Tor"
+  become: true
+  systemd:
+    name: tor
+    state: restarted

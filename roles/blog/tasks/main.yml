@@ -31,3 +31,8 @@
     - server
     - gitea
     - server_specific
+- include: tor.yml
+  tags:
+    - server
+    - tor
+    - server_specific
