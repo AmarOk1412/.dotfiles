@@ -1,9 +1,3 @@
-- name: Install nginx
-  become: true
-  dnf:
-    name: nginx
-    state: latest
-
 - name: Install certbot
   become: true
   dnf:
@@ -16,9 +10,17 @@
     name: certbot-nginx
     state: latest
 
-- name: Generate certificate
+- name: Generate certificate for enconn.fr
   become: true
   command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d {{ hostname }}"
+
+- name: Generate certificate for media.enconn.fr
+  become: true
+  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d media.enconn.fr"
+
+- name: Generate certificate for code.enconn.fr
+  become: true
+  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d code.enconn.fr"
 
 - name: Add cron to update certificate
   become: true

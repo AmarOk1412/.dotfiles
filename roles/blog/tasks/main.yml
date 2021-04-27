@@ -16,6 +16,11 @@
     - server
     - media.enconn.fr
     - server_specific
+- include: gitea.yml
+  tags:
+    - server
+    - gitea
+    - server_specific
 - include: lets_encrypt.yml
   tags:
     - server
@@ -25,11 +30,6 @@
   tags:
     - server
     - nameserver
-    - server_specific
-- include: gitea.yml
-  tags:
-    - server
-    - gitea
     - server_specific
 - include: tor.yml
   tags:

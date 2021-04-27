@@ -1,19 +1,26 @@
-- name: Copy .htpasswd for media.enconn.fr
+- name: Prepare Jellyfin environment
   become: true
+  shell: | # TODO clean
+    docker pull jellyfin/jellyfin
+    mkdir -p /var/lib/jellyfin
+    chown -R amarok:nginx /var/lib/jellyfin
+    mkdir -p /etc/jellyfin
+    chown -R amarok:nginx /etc/jellyfin
+    mkdir -p /home/amarok/.cache/jellyfin
+    chown -R amarok:nginx /home/amarok/.cache/jellyfin
+    mkdir -p /media/jellyfin
+    chown -R amarok:nginx /media/jellyfin
+    mkdir -p /opt/jellyfin
+    chown -R amarok:nginx /opt/jellyfin
+
+- name: Copy jellyfin config
   copy:
-    remote_src: yes
-    src: "/tmp/decrypted_lutices/media.enconn.fr/.htpasswd"
-    dest: "/media/.htpasswd"
+    src: .config/jellyfin/docker-compose.yml
+    dest: "/opt/jellyfin/docker-compose.yml"
     mode: '0644'
 
-- name: Embrace SE Linux fun for media
+- name: Start Jellyfin
   become: true
-  command: chcon -R -t httpd_sys_content_t /media/media_drive/
-
-- name: Embrace SE Linux fun for htpasswd
-  become: true
-  command: chcon -R -t httpd_sys_content_t /media/media_drive/.htpasswd
-
-- name: Generate certificate
-  become: true
-  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d media.enconn.fr"
+  shell:
+    cmd: docker-compose up -d
+    chdir: /opt/jellyfin

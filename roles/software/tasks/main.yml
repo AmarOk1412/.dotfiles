@@ -4,7 +4,9 @@
     - update_server
 - include: ansible.yml
 - include: docker.yml
-  tags: docker
+  tags:
+    - server
+    - docker
 - include: firefox-nightly.yml
   tags:
     - firefox-nightly

@@ -1,3 +1,9 @@
+- name: Install nginx
+  become: true
+  dnf:
+    name: nginx
+    state: latest
+
 - name: Add user to nginx group
   become: true
   user:
@@ -16,7 +22,7 @@
 
 - name: Clone Enconn
   git:
-    repo: git@github.com:AmarOk1412/AmarOk1412.github.io.git
+    repo: https://github.com/AmarOk1412/AmarOk1412.github.io.git
     dest: /var/www/enconn
     accept_hostkey: yes
     force: yes
@@ -24,12 +30,12 @@
 - name: Fix permissions /var/www/enconn
   become: true
   file:
-      path: /var/www/enconn
+      path: /var/www/
       state: directory
       owner: "{{ username }}"
-      group: "{{ username }}"
+      group: "nginx"
       recurse: yes
-      mode: mode=u=rwX,g=rX
+      mode: 0750
 
 - name: Embrace SE Linux fun
   command: chcon -R -t httpd_sys_content_t /var/www/enconn

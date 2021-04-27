@@ -15,13 +15,19 @@
   dnf:
     name: "{{ item }}"
     state: absent
-  with_items: [docker, docker-common, container-selinux, docker-selinux, docker-engine]
+  with_items: [docker, docker-common, container-selinux, docker-selinux, docker-engine, docker-compose]
 
 - name: Install docker
   become: true
   dnf:
     name: docker
     state: latest
+
+- name: Start service docker
+  become: true
+  service:
+    name: docker
+    state: started
 
 - name: Enable docker service
   become: true

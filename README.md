@@ -38,7 +38,7 @@ ansible-playbook playbook.yml -K --extra-vars "ldap=<my_ldap>"
 
 For the server:
 ```
-ansible-playbook playbook_enconn.yml -u amarok -i hosts
+ansible-playbook playbook_enconn.yml -u amarok -i hosts --tags=server
 ```
 
 # Lutices

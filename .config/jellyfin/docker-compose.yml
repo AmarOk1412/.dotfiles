@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: "host"
+    volumes:
+      - /var/lib/jellyfin:/config:Z
+      - /home/amarok/.cache/jellyfin:/cache:Z
+      - /media/jellyfin:/media:Z
+    restart: "unless-stopped"
+    # Optional - alternative address used for autodiscovery
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://example.com

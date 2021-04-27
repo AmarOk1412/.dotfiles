@@ -38,10 +38,6 @@
     enabled: yes
     masked: no
 
-- name: Generate certificate
-  become: true
-  command: "certbot --nginx -m {{ lets_encrypt_mail }} --agree-tos --no-eff-email --redirect -d code.enconn.fr"
-
 - name: Fix permissions by locking config
   become: true
   shell: |

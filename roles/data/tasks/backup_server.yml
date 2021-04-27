@@ -13,7 +13,7 @@
     dest: "/opt/scripts/backup.sh"
     mode: '0700'
 
-- name: Add cron to backup servevr
+- name: Add cron to backup server
   become: true
   cron:
     name: "Backup"
